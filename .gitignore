@@ -2,4 +2,4 @@ data/raw_berita/
 data/raw_x/
 __pycache__/
 .DS_Store
-venv/
+.env
