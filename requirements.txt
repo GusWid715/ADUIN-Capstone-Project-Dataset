@@ -1,24 +1,4 @@
-# JUPYTER & KERNEL
-ipykernel==6.29.5
-
-# CORE DATA WRANGLING
-pandas==2.2.2
-numpy==1.26.4
-openpyxl==3.1.2      # Diperlukan Pandas untuk membaca file .xlsx (query.xlsx)
-
-
-# MACHINE LEARNING & NLP
-scikit-learn==1.4.2  # Untuk Stratified Split & F1-Score
-iterative-stratification==0.1.0  # Untuk Multilabel Stratified Split
-
-
-# DATA VISUALIZATION (EDA)
-matplotlib==3.8.4
-seaborn==0.13.2
-plotly==5.20.0       # Untuk grafik interaktif
-
-# DASHBOARDING
-streamlit==1.33.0    # Untuk deployment dasbor admin nanti
-
-# ENVIRONMENT VARIABLES
-python-dotenv==1.0.1
+streamlit
+pandas
+matplotlib
+seaborn
