@@ -2,8 +2,7 @@
 
 > *"Aduin aja, biar AI yang urus"*
 
-[![Streamlit App](https://shields.io)](https://guswid715-aduin-capstone-project-dataset-app-z4epkh.streamlit.app/)
-[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
+
 
 Repositori ini difokuskan pada pemrosesan data (Data Wrangling), rekayasa fitur (Feature Engineering), dan Exploratory Data Analysis (EDA) untuk proyek **ADUIN**, sebuah platform klasifikasi pengaduan masyarakat berbasis AI. Proyek ini dikembangkan untuk Capstone Project DBS Foundation Coding Camp 2026 oleh Tim CC26-PSU299.
 
