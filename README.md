@@ -15,16 +15,27 @@ Hasil Exploratory Data Analysis (EDA) interaktif dapat diakses melalui Streamlit
 
 ## 🎯 Fokus Utama Repositori
 Repositori ini merepresentasikan tahap awal dari *pipeline* AI ADUIN, yang meliputi:
-1. **Data Wrangling End-to-End:** - Pembersihan *noise* (URL, mention, hashtag, karakter non-ASCII).
-   - Normalisasi teks informal (*slang*, *typo*) dari Twitter/X menjadi bahasa baku.
-   - Penyatuan sumber data media sosial (Twitter/X) dan portal berita (Kaggle).
-2. **Feature Engineering:**
-   - Pembuatan target *Multi-label* untuk 10 Kategori Isu Publik (Infrastruktur, Lingkungan, dll).
-   - Penentuan target *Single-label* untuk tingkat Urgensi dan Sentimen menggunakan metode *Keyword Scoring* & *Pessimistic Priority*.
-3. **Data Splitting (Stratified):**
-   - Pemisahan dataset menjadi Train (80%) dan Test (20%) secara proporsional untuk 10 label kategori menggunakan `iterative-stratification`.
-4. **Exploratory Data Analysis (EDA):**
-   - Menjawab pertanyaan bisnis terkait distribusi isu teratas, urgensi, dan korelasi sentimen publik.
+### 1. Data Wrangling End-to-End
+Proses pembersihan dan penyelarasan data dilakukan secara menyeluruh pada dua sumber data yang berbeda agar menghasilkan dataset yang homogen dan siap latih:
+* **Pembersihan Noise Otomatis:** Menghapus komponen non-kontekstual seperti URL, *mention* akun (`@username`), *hashtag* (`#`), karakter non-ASCII (emoji/aksara asing), serta tanda baca pada seluruh data Twitter/X dan Berita Kaggle.
+* **Normalisasi Teks Informal (Twitter/X):** Mengubah kata-kata gaul (*slang*), singkatan, dan salah ketik (*typo*) menjadi kata baku bahasa Indonesia menggunakan metode *Dictionary Mapping* (Kamus Normalisasi) agar bobot kata tidak terpecah.
+* **Penyelarasan Panjang Teks Berita (Kaggle):** Memotong artikel berita dan hanya mengambil **50 kata pertama (Lead Berita)** yang mengandung inti informasi (5W1H). 
+* **Case Folding & Standardisasi:** Mengubah seluruh karakter teks menjadi huruf kecil (*lowercase*) serta menghapus spasi berlebih (*strip*) untuk menjamin konsistensi tokenisasi.
+* **Integrasi Ragam Sumber Data:** Menyatukan (*merge*) data media sosial yang bersifat informal dengan data portal berita yang bersifat formal ke dalam satu *dataframe* utuh yang seimbang.
+
+### 2. Feature Engineering & Pelabelan
+* **Single-label (Urgensi & Sentimen):** Penentuan tingkat Urgensi (Rendah, Sedang, Tinggi) dan Sentimen (Negatif, Netral, Positif) menggunakan pendekatan *Keyword Scoring* berbasis aturan Regex *Word Boundary* (`\b`) serta pengaplikasian logika *Pessimistic Priority*.
+* **Multi-label (10 Kategori Isu Publik):** Ekstraksi dan pemetaan otomatis ke dalam 10 kolom target biner isu secara simultan (Infrastruktur, Lingkungan, Air & Sanitasi, Bencana, Transportasi, Pelayanan Publik, Ekonomi, Keamanan, Pendidikan, dan Kesehatan).
+
+### 3. Data Splitting (Stratified & Balanced)
+* **Pemisahan Proporsional:** Membagi dataset menjadi Data Latih (Train Set - 80%) dan Data Uji (Test Set - 20%) menggunakan teknik `MultilabelStratifiedShuffleSplit` agar sebaran ke-10 kombinasi label kategori terdistribusi secara adil dan presisi.
+* **Penyelamatan Bias Model (Undersampling):** Melakukan pemotongan (*downsampling*) acak pada kelas mayoritas target urgensi khusus pada Data Latih untuk mengatasi masalah *Catastrophic Collapse* (akurasi tertahan di 17%) pada arsitektur BiLSTM, dengan tetap mempertahankan keaslian distribusi Data Uji sebagai representasi dunia nyata.
+
+### 4. Exploratory Data Analysis (EDA)
+* Menjawab pertanyaan bisnis inti organisasi mengenai frekuensi aduan tertinggi, peta urgensi bencana, serta pengujian korelasi intensitas emosi (sentimen) terhadap tingkat prioritas penanganan masalah.
+
+### 5. Data Dictionary
+📖 Penjelasan detail mengenai skema dataset final, tipe data, dan definisi masing-masing kolom pengkodean target dapat diakses pada file **[`Data_Dictionary_ADUIN.md`](Data_Dictionary_ADUIN.md)**.
 
 ---
 
